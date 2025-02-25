@@ -27,11 +27,12 @@ Due to its lightweight architecture, this model can be deployed efficiently on l
 You can load the model using 🤗 Transformers:
 
 ```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import AutoPeftModelForCausalLM
+from transformers import AutoTokenizer
+import torch
 
-model_name = "NotShrirang/sql-deepseek-r1-distill-qwen-1.5B"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+model = AutoPeftModelForCausalLM.from_pretrained("NotShrirang/DeepSeek-R1-Distill-Qwen-1.5B-SQL-Coder-PEFT")
+tokenizer = AutoTokenizer.from_pretrained("NotShrirang/DeepSeek-R1-Distill-Qwen-1.5B-SQL-Coder-PEFT")
 
 prompt = "Write a SQL query to get the total revenue from the sales table."
 inputs = tokenizer(prompt, return_tensors="pt")
